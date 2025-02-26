@@ -45,6 +45,8 @@ class MainActivity : AppCompatActivity() {
 
         val dbDir = File(filesDir, "rocksdb_test").absolutePath
         val options = Options().setCreateIfMissing(true)
+//        options.setCompressionType(CompressionType.NO_COMPRESSION)
+//        options.setCompressionType(CompressionType.ZLIB_COMPRESSION)
         options.setCompressionType(CompressionType.LZ4_COMPRESSION)
 //        options.setCompressionType(CompressionType.LZ4HC_COMPRESSION)
         var db: RocksDB? = null
@@ -62,6 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         } catch (e: RocksDBException) {
             Log.e("RocksDBTest", "RocksDB error: ${e.message}")
+            e.printStackTrace()
         } finally {
             db?.close()
             options.close()
